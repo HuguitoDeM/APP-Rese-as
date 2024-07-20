@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
-const setupModel = require("./../db/models");
+const setupModel = require("./../db/models/reseña.model");
 
 const mongoUri = config.uri;
 

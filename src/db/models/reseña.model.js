@@ -6,8 +6,7 @@ const reseñaSchema = new mongoose.Schema({
   estrellas: { type: Number, required: true },
   comentario: { type: String, required: true },
 });
-reseñaSchema.plugin(AutoIncrement, { inc_field: "id" });
 
-const Reseña = mongoose.model("Reseña", personSchema);
+const Reseña = mongoose.model("Reseña", reseñaSchema);
 
 module.exports = Reseña;
