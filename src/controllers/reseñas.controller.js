@@ -1,4 +1,5 @@
 const reseñaService = require("../services/reseñas.service");
+
 const service = new reseñaService();
 
 const create = async (req, res) => {
@@ -28,3 +29,4 @@ const delete_ = async (req, res) => {
     res.status(500).send({ success: false, message: error.message });
   }
 };
+module.exports = { create, get, delete_ };

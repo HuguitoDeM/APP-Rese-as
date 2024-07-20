@@ -16,10 +16,10 @@ app.get("/", (req, res) => {
 
 routerApi(app);
 
-app.listen(port, (err) => {
+app.listen(3000, (err) => {
   if (err) {
     console.error("Error al iniciar el servidor " + err);
     return;
   }
-  console.log(`Port ==> ${port}`);
+  console.log(`Port ==> 3000`);
 });

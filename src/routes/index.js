@@ -5,7 +5,7 @@ const reseñasRouter = require("../routes/reseñas.routes");
 function routerApi(app) {
   const router = express.Router();
   app.use("/api/v1", router);
-  router.use("/films", reseñasRouter);
+  router.use("/reseñas", reseñasRouter);
 }
 
 module.exports = routerApi;

@@ -1,6 +1,6 @@
 const { models } = require("../libs/mongodb");
 
-class ReseñaService {
+class reseñaService {
   constructor() {}
 
   async find() {
@@ -17,3 +17,4 @@ class ReseñaService {
     return res;
   }
 }
+module.exports = reseñaService;
