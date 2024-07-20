@@ -1,19 +1,19 @@
-const { models } = require("../libs/mongodb");
+const Reseña = require("../db/models/reseña.model");
 
 class reseñaService {
   constructor() {}
 
   async find() {
-    const res = await models.mongoose.find();
+    const res = await Reseña.find();
     return res;
   }
 
   async create(data) {
-    const res = await models.mongoose.insertOne(data);
+    const res = await Reseña.insertOne(data);
     return res;
   }
   async delete_(id) {
-    const res = await models.mongoose.deleteOne(id);
+    const res = await Reseña.deleteOne(id);
     return res;
   }
 }
