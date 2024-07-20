@@ -1,13 +1,23 @@
 const express = require("express");
-const config = require("config");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const { config } = require("dotenv");
-const db = mongoose.connection;
 const app = express();
+const dotenv = require("dotenv");
 
-const port = 3000;
+dotenv.config();
 
-app.use(bodyParser.json());
+app.use(cors());
 
-mongoose.connect(config.uri);
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Backend con NodeJs- Express + CRUD API REST + MySql");
+});
+
+routerApi(app);
+
+app.listen(port, (err) => {
+  if (err) {
+    console.error("Error al iniciar el servidor " + err);
+    return;
+  }
+  console.log(`Port ==> ${port}`);
+});
