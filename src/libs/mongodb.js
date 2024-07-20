@@ -1,25 +1,30 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
-const setupModel = require("./../db/models/reseña.model");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const mongoUri = config.uri;
+const uri = config.uri;
 
-async function connectToDatabase() {
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+async function run() {
   try {
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    });
-    console.log("Conexión a la base de datos exitosa");
-
-    setupModel(mongoose);
-  } catch (error) {
-    console.error("Error al conectar a la base de datos: ", error);
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
   }
 }
-
-connectToDatabase();
+run().catch(console.dir);
 
 module.exports = mongoose;
