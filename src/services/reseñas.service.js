@@ -9,11 +9,12 @@ class reseñaService {
   }
 
   async create(data) {
-    const res = await Reseña.insertOne(data);
+    const nuevaReseña = new Reseña(data);
+    const res = await nuevaReseña.save();
     return res;
   }
   async delete_(id) {
-    const res = await Reseña.deleteOne(id);
+    const res = await Reseña.findByIdAndDelete(id);
     return res;
   }
 }
