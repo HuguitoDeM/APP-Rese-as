@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Backend con NodeJs- Express + CRUD API REST + MySql");
+  res.send("Backend con NodeJs- Express + CRUD API REST + MongoDB");
 });
 
 routerApi(app);
