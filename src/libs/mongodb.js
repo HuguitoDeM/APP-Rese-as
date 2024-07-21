@@ -4,6 +4,28 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const uri = config.uri;
 
+// Conexión con Mongoose
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+const db = mongoose.connection;
+
+db.on("error", (error) => {
+  console.error("Error de conexión a MongoDB:", error);
+});
+
+db.once("open", () => {
+  console.log("Conexión exitosa a MongoDB con Mongoose!");
+});
+
+// Conexión con MongoClient
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -11,20 +33,24 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
+
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    // Conectar el cliente al servidor (opcional a partir de la v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
+    // Enviar un ping para confirmar una conexión exitosa
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
+  } catch (error) {
+    console.error("Error conectando a MongoDB con MongoClient:", error);
   } finally {
-    // Ensures that the client will close when you finish/error
+    // Asegura que el cliente se cierre cuando termines/error
     await client.close();
   }
 }
+
 run().catch(console.dir);
 
 module.exports = mongoose;
