@@ -15,7 +15,6 @@ app.get("/", (req, res) => {
 });
 
 routerApi(app);
-
 app.listen(port, (err) => {
   if (err) {
     console.error("Error al iniciar el servidor " + err);
