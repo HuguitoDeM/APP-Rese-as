@@ -1,9 +1,9 @@
+// libs/mongodb.js
 const { config } = require("../config/config");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const uri = config.uri;
 
-// Configuración y conexión con MongoClient
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -15,17 +15,23 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    await listDatabases(client);
   } catch (error) {
-    console.error("Error conectando a MongoDB con MongoClient:", error);
+    console.error("Error connecting to MongoDB with MongoClient:", error);
   } finally {
     await client.close();
   }
 }
-run().catch(console.error);
 
-async function listDatabases(client) {
-  databaseList = await client.db().admin().listDatabases();
-  console.log("databases: ");
-  databaseList.databases.forEach((element) => console.log(`- ${element.name}`));
+async function getComentarios() {
+  try {
+    await client.connect();
+    const db = await client.db("comentarios");
+    const collection = await db.collection("resenias");
+    return { client, db, collection };
+  } catch (error) {
+    console.error("Error getting comentarios collection:", error);
+    throw error;
+  }
 }
+
+module.exports = { run, getComentarios };
