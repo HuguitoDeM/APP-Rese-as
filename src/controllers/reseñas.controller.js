@@ -22,7 +22,7 @@ const get = async (req, res) => {
 
 const delete_ = async (req, res) => {
   try {
-    const { id } = req.params.id;
+    const { id } = req.params;
     const response = await service.delete_(id);
     res.json(response);
   } catch (error) {
