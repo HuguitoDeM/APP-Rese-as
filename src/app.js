@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Backend con NodeJs- Express + CRUD API REST + MongoDB");
+  res.send("Backend con NodeJs- Express + MongoDB para app de reseñas");
 });
 
 routerApi(app);
